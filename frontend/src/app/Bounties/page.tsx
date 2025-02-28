@@ -10,7 +10,7 @@ export default function Bounties() {
     useEffect(() => {
         const getBounties = async () => {
             try {
-                const response = await fetch("http://localhost:4000/api/bounties");
+                const response = await fetch("https://ethapp-wine.vercel.app/api/bounties");
                 if (!response.ok) {
                     throw new Error('Failed to fetch bounties');
                 }

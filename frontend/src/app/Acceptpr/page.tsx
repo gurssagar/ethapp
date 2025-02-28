@@ -70,7 +70,7 @@ const YourComponent = () => {
         if (sessionStorage.getItem("code") && (storedData === null)) {
             async function getAccessToken() {
                 try {
-                    const response = await fetch("http://localhost:4000/getAccessToken?code=" + sessionStorage.getItem("code"));
+                    const response = await fetch("https://ethapp-wine.vercel.app/getAccessToken?code=" + sessionStorage.getItem("code"));
                     const data = await response.json();
                     if (data.access_token) {
                         localStorage.setItem("accessToken", data.access_token);
@@ -85,7 +85,7 @@ const YourComponent = () => {
 
         async function fetchContributeData() {
             try {
-                const response = await fetch(`http://localhost:4000/api/contributeRequest`);
+                const response = await fetch(`https://ethapp-wine.vercel.app/api/contributeRequest`);
                 if (response.ok) {
                     const data = await response.json();
                     setUserData(data);
@@ -99,7 +99,7 @@ const YourComponent = () => {
 
     const acceptContribution = async () => {
         try {
-            const response = await fetch("http://localhost:4000/api/contributeRequest", {
+            const response = await fetch("https://ethapp-wine.vercel.app/api/contributeRequest", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

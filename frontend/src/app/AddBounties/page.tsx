@@ -198,7 +198,7 @@ export function CreateBountyForm() {
 
             // Then handle form submission
             if (localStorage.getItem("accessToken")) {
-                const response = await fetch("http://localhost:4000/api/bounties", {
+                const response = await fetch("https://ethapp-wine.vercel.app/api/bounties", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

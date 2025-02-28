@@ -36,7 +36,7 @@ export default function BountyRequests() {
         let storedData = localStorage.getItem("access_token");
         if (sessionStorage.getItem("code") && (storedData === null)) {
             async function getAccessToken() {
-                await fetch("http://localhost:4000/getAccessToken?code=" + sessionStorage.getItem("code"), {
+                await fetch("https://ethapp-wine.vercel.app/getAccessToken?code=" + sessionStorage.getItem("code"), {
                     method: "GET"
                 }).then(response => {
                     return response.json()
@@ -48,7 +48,7 @@ export default function BountyRequests() {
                     }
                 });
 
-                await fetch("http://localhost:4000/getUserData", {
+                await fetch("https://ethapp-wine.vercel.app/getUserData", {
                     method: "GET",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("accessToken")
@@ -64,7 +64,7 @@ export default function BountyRequests() {
         console.log(userDatad, "userDatad")
 
         function fetchBounties() {
-            fetch(`http://localhost:4000/api/contribute`)
+            fetch(`https://ethapp-wine.vercel.app/api/contribute`)
                 .then((res) => res.json())
                 .then((data) => {
                     setUserData(data)

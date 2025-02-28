@@ -22,7 +22,7 @@ export default function SignIn() {
             let storedData=localStorage.getItem("access_token");
             if(codeParams && (storedData===null)){
                 async function getAccessToken(){
-                    await fetch("http://localhost:4000/getAccessToken?code="+codeParams,{
+                    await fetch("https://ethapp-wine.vercel.app/getAccessToken?code="+codeParams,{
                         method:"GET"
                     }).then(response => {
                         return response.json()})
@@ -34,7 +34,7 @@ export default function SignIn() {
                             }
                         });
     
-                    await fetch("http://localhost:4000/getUserData",{
+                    await fetch("https://ethapp-wine.vercel.app/getUserData",{
                         method:"GET",
                         headers:{
                             "Authorization":"Bearer "+localStorage.getItem("accessToken")

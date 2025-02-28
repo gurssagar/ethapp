@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "../../../../../temp/web3-tezos/tezos/src/lib/utils"
+import { cn } from "@/lib/utils"
 
 export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>
 

@@ -21,7 +21,7 @@ export default function ViewBounties() {
     }, [currentPage]);
 
     const fetchBounties = async () => {
-        const res = await fetch(`http://localhost:4000/api/bounties?page=${currentPage}`);
+        const res = await fetch(`https://ethapp-wine.vercel.app/api/bounties?page=${currentPage}`);
         const data = await res.json();
         setUserData(data.data);
         console.log(data.data,"akk");
@@ -82,7 +82,7 @@ export default function ViewBounties() {
             accepted:false
         };
 
-        const response = await fetch('http://localhost:4000/api/contribute', {
+        const response = await fetch('https://ethapp-wine.vercel.app/api/contribute', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
