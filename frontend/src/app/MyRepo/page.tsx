@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Octokit } from "octokit";
 
+
 const YourComponent = () => {
     const [reRender, setReRender] = useState(false);
     const [userData, setUserData] = useState<any[]>([]);
@@ -74,7 +75,14 @@ const YourComponent = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    githubRepo: formData.repository,
+                    repoOwner: formData.repoOwner,
+                    contributorUsername: formData.contributorUsername,
+                    prLink: formData.prLink,
+                    walletAddress: formData.walletAddress,
+                    accepted: formData.accepted,
+                })
             });
 
             if (response.ok) {
@@ -128,8 +136,86 @@ const YourComponent = () => {
                 <div className="text-3xl font-bold text-center mb-4 pb-20">
                     Contribution Requests
                 </div>
-                <div className="grid grid-cols-3 gap-y-10">
+                <div className="grid grid-cols-3 gap-x-10 gap-y-10">
                     {userData.map((user, index) => (
+                        <>
+                        <div className="absolute">
+                        {showModal && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                    <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-md w-full mx-4">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-xl font-bold">Contribute</h2>
+                            <button 
+                                onClick={() => setShowModal(false)}
+                                className="text-gray-500 hover:text-gray-700"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium mb-1">
+                                    Github PR Request Link
+                                </label>
+                                <input
+                                    type="text"
+                                    value={formData.prLink}
+                                    onChange={(e) => setFormData({ ...formData, prLink: e.target.value })}
+                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">
+                                    BlockChain Wallet Address
+                                </label>
+                                <input
+                                    type="text"
+                                    value={formData.walletAddress}
+                                    onChange={(e) => setFormData({ ...formData, walletAddress: e.target.value })}
+                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="flex justify-between items-center">
+                                    <span className="text-gray-700 font-medium dark:text-white">Repository:</span>
+                                    <input
+                                        type="text"
+                                        name="githubRepo"
+                                        className="text-gray-600 dark:text-white"
+                                        value={user.githubRepo}
+                                        readOnly
+                                    />
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-700 font-medium dark:text-white">Repo Owner:</span>
+                                    <input
+                                        type="text"
+                                        name="repoOwner"
+                                        className="text-gray-600 dark:text-white"
+                                        value={user.repoOwner}
+                                        readOnly
+                                    />
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-700 font-medium dark:text-white">Contributor:</span>
+                                    <input
+                                        type="text"
+                                        name="contributorUsername"
+                                        className="text-gray-600 dark:text-white"
+                                        value={user.contributorUsername}
+                                        readOnly
+                                    />
+                                </div>
+                            <button
+                                type="submit"
+                                className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+                            >
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
+                        </div>
                         <div key={index} className="bg-[#121212] p-10 rounded-xl mx-auto">
                             <div className="request-info flex flex-col gap-4 mb-6">
                                 <div className="flex justify-between items-center">
@@ -189,55 +275,12 @@ const YourComponent = () => {
                                 </div>
                             </div>
                         </div>
+                        </>
                     ))}
                 </div>
             </div>
 
-            {showModal && (
-                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                    <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-md w-full mx-4">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-bold">Contribute</h2>
-                            <button 
-                                onClick={() => setShowModal(false)}
-                                className="text-gray-500 hover:text-gray-700"
-                            >
-                                ✕
-                            </button>
-                        </div>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Github PR Request Link
-                                </label>
-                                <input
-                                    type="text"
-                                    value={formData.prLink}
-                                    onChange={(e) => setFormData({ ...formData, prLink: e.target.value })}
-                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    BlockChain Wallet Address
-                                </label>
-                                <input
-                                    type="text"
-                                    value={formData.walletAddress}
-                                    onChange={(e) => setFormData({ ...formData, walletAddress: e.target.value })}
-                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                            </div>
-                            <button
-                                type="submit"
-                                className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
-                            >
-                                Submit
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            )}
+            
         </>
     );
 };

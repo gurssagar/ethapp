@@ -64,6 +64,7 @@ const ContributeRequestSchema = new mongoose.Schema({
     prLink:{type:String,required:true},
     accepted: { type: Boolean, required: true, default: false },
 }, { timestamps: true });
+
 const contributeRequest=mongoose.model('contributeRequest',ContributeRequestSchema);
 const assignBounty=mongoose.model('AssignBounty', bountySchema);
 const Bounty = mongoose.model('Bounty', bountySchema);
@@ -84,7 +85,7 @@ app.get("/api/contributeRequest",async(req,res)=>{
 app.post('/api/contributeRequest',async(req,res) => {
     const contributeReq = req.body;
     console.log(contributeReq,"temp");
-    const contributeUser = new ContributeUsers(contributeReq);
+    const contributeUser = new contributeRequest(contributeReq);
     try {
         await contributeUser.save();
         res.status(201).json({ message: 'Contribution saved successfully' });

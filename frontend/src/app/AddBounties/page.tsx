@@ -297,7 +297,7 @@ export function CreateBountyForm() {
                         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
 
                             <div className="w-full sm:w-1/3 space-y-2">
-                                <Label htmlFor="reward-amount">Reward (in XTZ)</Label>
+                                <Label htmlFor="reward-amount">Reward</Label>
                                 <Input
                                     id="reward-amount"
                                     name="rewardAmount"

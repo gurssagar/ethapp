@@ -7,7 +7,7 @@ const ConnectWallet = () => {
   return (
     <div>
       {account ? (
-        <p>Connected: {account}</p>
+        <p>Connected Metamask</p>
       ) : (
         <button onClick={connectWallet} className="px-4 py-2 bg-blue-600 text-white rounded">
           Connect Wallet

@@ -89,15 +89,16 @@ export default function Menu() {
                 </div>
                 <div className="flex space-x-4">
                     <button className="text-white " onClick={() => router.push('/')}>Home</button>
-                    <button className="text-white " onClick={() => router.push('/About')}>About</button>
-                    <button className="text-white " onClick={() => router.push('/Contact')}>Contact</button>
                     {
                         localStorage.getItem("accessToken")?
                         <>
                             <button className="text-white " onClick={() => router.push('/AddBounties')}>AddBounties</button>
                             <button className="text-white " onClick={() => router.push('/ViewBounties')}>ViewBounties</button>
                             <button className="text-white " onClick={() => router.push('/Requests')}>Requests</button>
-                            <ConnectWallet/>                        </>
+                            <button className="text-white " onClick={() => router.push('/MyRepo')}>My Repo</button>
+                            <button className="text-white " onClick={() => router.push('/Acceptpr')}>Accept PR</button>
+
+                                                  </>
                         :
                         <>
                         </>
@@ -108,6 +109,8 @@ export default function Menu() {
                     
                     {
                         localStorage.getItem("accessToken") ?
+                            <div className="flex space-x-8 my-auto">
+                             <ConnectWallet/> 
                             <div className='flex '>
 
 
@@ -146,7 +149,11 @@ export default function Menu() {
                                                             }}>
                                                         Sign Out
                                 </button>
-                            </div> : <>
+                            
+                            
+                            </div> 
+                            
+                            </div>: <>
                             
                                 <button className="rounded-full  dark:text-black px-4  py-2 bg-gray-100 dark:bg-white "
                                         onClick={loginwithGithub}>
