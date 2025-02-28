@@ -6,7 +6,8 @@ import {useEffect, useState} from "react";
 import {AppleCardsCarouselDemo} from "../components/home/home3";
 import {TypewriterEffectSmoothDemo} from "../components/home/home4";
 import DecryptedText from '../components/ui/decryptedtext'
-
+import Spline from '@splinetool/react-spline';
+import ScrollVelocity from '../components/ui/scrollVelocity';
 
 
 export default function Home() {
@@ -29,48 +30,45 @@ export default function Home() {
                 <Menu/>
             </div>
           <div className="bg-white dark:bg-black">
-              <div className={`text-center `}>
+            <div className="flex">
+            <div className="w-1/2 px-20">
+              <div className={` `}>
                   <button className={` mt-20 p-4 rounded-3xl bg-gray-100 dark:bg-[#171717]`}>On-Chain Rewards for Dev
                       Contributions
                   </button>
               </div>
-              <h1 className="text-4xl w-screen h lg:text-6xl font-semibold  mx-auto text-center mt-6 relative   bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
-                  Earn Crypto by Solving
+              <h1 className="text-[200px] h lg:text-9xl font-semibold  mx-auto mt-6 relative   bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+                  Earn Crypto by Solving Github Issues
               </h1>
-              <div
-                  className=" flex flex-col items-center justify-center overflow-hidden rounded-md">
-                  <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-black dark:text-white relative z-20">
-                      Github Issues
-                  </h1>
-                  <div className="w-[40rem] h-40 relative">
-                      {/* Gradients */}
-                      <div
-                          className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm"/>
-                      <div
-                          className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4"/>
-                      <div
-                          className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm"/>
-                      <div
-                          className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4"/>
-
-                      {/* Core component */}
-                      <SparklesCore
-                          background="transparent"
-                          minSize={0.4}
-                          maxSize={1}
-                          particleDensity={1200}
-                          className="w-full h-full"
-                          particleColor={`${theme ? '#FFFFFF' : '#000000'}`}
-                      />
-
-                      {/* Radial Gradient to prevent sharp edges */}
-                      <div
-                          className="absolute inset-0 w-full h-full bg-white dark:bg-black  [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
-                  </div>
+              <div className="flex space-x-4">
+                <button className="flex text-black items-center justify-center mt-10 p-4 rounded-3xl bg-gray-100 dark:bg-[#14f195]">
+                    START CONTRIBUTING
+                </button>
+                <button className="flex items-center border-2 border-white justify-center mt-10 p-4 rounded-3xl ">
+                    LIST BOUNTIES
+                </button>
+                
               </div>
-              <GlobeDemo/>
+              <div className="text-xl pt-10">
+                GitFund is a decentralized platform that rewards GitHub contributions with cryptocurrency. Developers earn through bounties, while project owners track progress and distribute payouts transparently. It bridges open-source development with blockchain, fostering innovation and collaboration.
+                </div>
+              </div>
+              <div className="w-1/2">
+              <Spline scene="https://prod.spline.design/mL7aUBF7uqtTsE5v/scene.splinecode" />
+              </div>
+              </div>
+              <div>
+                
+            </div>
+            <div>
+            <ScrollVelocity
+            texts={['Code Contribute Collect', 'Hackl Solve Earn']} 
+            velocity={100} 
+            className="custom-scroll-text"
+            />
+            </div>
+            <GlobeDemo/>
               <AppleCardsCarouselDemo/>
-              <TypewriterEffectSmoothDemo/>
           </div>
 
       </main>

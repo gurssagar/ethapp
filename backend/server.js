@@ -1,5 +1,6 @@
 var express = require('express');
 var cors=require('cors');
+require('dotenv').config();
 const fetch=(...args) => import ('node-fetch').then(({default :fetch}) => fetch(...args));
 var bodyParser=require('body-parser');
 const CLIENT_ID = 'Ov23liYe2P4o4RO7y4No';
@@ -18,7 +19,7 @@ var app=express();
 
 
  //Mongoose Connection
-mongoose.connect("mongodb+srv://t3chnobromo:SagarTanav2003@cluster0.o3lns.mongodb.net/test", {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log("Connected to the server..."));

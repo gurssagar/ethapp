@@ -116,22 +116,20 @@ export default function ViewBounties() {
         <div className=" mt-40 ">
             <h1  className="pb-20 mt-20 text-4xl font-bold text-center mt-8">View bounties</h1>
         </div>
-        <div className="grid grid-rows-3 gap-8 p-4">
+        <div className="grid grid-cols-3 gap-8 p-4">
             {userData?.map((user: any, index: number) => (
                 <>
-                <div key={index} className="dark:bg-black dark:text-white mx-40 p-6 bg-white rounded-2xl shadow-lg border border-[#28282b]">
+                <div key={index} className="dark:bg-black dark:text-white  p-6 bg-white rounded-2xl shadow-lg border border-[#28282b]">
                 <h1 className="text-2xl font-semibold dark:text-white text-gray-800 mb-3">{user.title}</h1>
                 
                 <div className="flex items-center justify-between dark:text-white text-sm text-gray-600 mb-4">
                     <p className="font-medium dark:text-white">Difficulty: 
-                        <span className={`ml-1 px-2 py-1 dark:text-white rounded text-white 
-                            ${user.difficulty === 'Hard' ? 'bg-red-500' : 
-                              user.difficulty === 'Easy' ? 'bg-green-500' : 'bg-yellow-500'}`}>
+                    <span className={`ml-1 px-2 py-1  rounded text-white bg-gray-800 text-black`}>
                             {user.difficulty || 'Medium'}
                         </span>
                     </p>
                     <p>Status: 
-                        <span className="dark:text-white ml-1 px-2 py-1 rounded text-white bg-green-500">
+                        <span className="dark:text-black ml-1 px-2 py-1 rounded text-black bg-white">
                             {user.status || 'Live'}
                         </span>
                     </p>
@@ -140,10 +138,7 @@ export default function ViewBounties() {
                 <p className="text-gray-700 text-lg mb-2 dark:text-white"><strong>One-Liner:</strong> {user.oneLiner}</p>
                 <p className="text-gray-600 text-base mb-4 dark:text-white">{user.description}</p>
                 
-                <div className="grid grid-cols-2 gap-4 text-sm dark:text-white text-gray-600 mb-4">
-                    <p>📅 Reported: <span className="font-semibold dark:text-white">{new Date(user.createdAt).toLocaleString()}</span></p>
-                    <p>⏳ Last Updated: <span className="font-semibold dark:text-white">{new Date(user.updatedAt).toLocaleString()}</span></p>
-                </div>
+                
                 
                 <div className="dark:text-white space-y-2 text-sm">
                     <p>📂 <span className="font-semibold">Repository:</span> 
@@ -160,12 +155,12 @@ export default function ViewBounties() {
                 
                 <div className="flex items-center dark:text-white justify-between mt-5">
                     <p className="text-lg font-semibold dark:text-white text-gray-700">💰 Reward: {`${user.rewardAmount}${user.paymentToken}` || '100 USDC'}</p>
-                    <button  className="dark:text-white bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition" onClick={() => {
+                    <button  className="dark:text-black bg-white hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition" onClick={() => {
                     ChangeModal(true);
                     setRepoOwner(user.githubIssue);
                     setRepo(user.githubRepo);
                     }}>
-                        Investigate 🔍
+                        Investigate
                     </button>
                 </div>
                 </div>
@@ -250,7 +245,9 @@ export default function ViewBounties() {
                 ))
             }
 
-            {totalPages > 1 && (
+           
+        </div>
+        {totalPages > 1 && (
                 <div className="flex justify-center">
                     
                     
@@ -270,8 +267,6 @@ export default function ViewBounties() {
                         
                 </div>
             )}
-        </div>
-       
         
         </>
     );

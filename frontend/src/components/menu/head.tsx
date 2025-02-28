@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import ScrollReveal from '../ui/scrollReveal';
+import Spline from '@splinetool/react-spline';
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
     ssr: false,
@@ -397,8 +398,11 @@ export function GlobeDemo() {
     return (
         <div className="flex flex-col lg:flex-row items-center justify-center py-10 lg:py-20 min-h-screen lg:h-auto dark:bg-black bg-white relative w-full">
             <div className="block px-20  lg:flex  lg:mx-auto w-full relative overflow-hidden h-full md:h-[40rem] lg:px-4">
-                <div className="div lg:w-1/2 align-middle">
-                <h1 className="text-4xl sm:text-5xl font-bold py-10 text-neutral-700 dark:text-neutral-200 max-w-xl mt-2 ml-40">
+                
+                <div className="-ml-80 lg:w-3/4 h-[100vh] -bottom-20  z-10">
+                <Spline scene="https://prod.spline.design/Y7emUt9Mw31y5Jhm/scene.splinecode" />                </div>
+                <div className="-ml-40 div lg:w-1/2 align-middle">
+                <h1 className="text-7xl sm:text-6xl font-bold py-10 text-neutral-700 dark:text-neutral-200 max-w-xl mt-2 ml-40">
                         What is GitFund ?
                     </h1>
                     <p className="text-base sm:text-lg md:text-xl font-normal text-neutral-700 dark:text-neutral-200 max-w-xl mt-2 ml-40">
@@ -441,9 +445,6 @@ export function GlobeDemo() {
                         </span>
                     </button>
                 </motion.div>
-                </div>
-                <div className=" lg:w-1/2 -bottom-20 h-72 md:h-full z-10">
-                    <World data={sampleArcs} globeConfig={globeConfig}/>
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@ import { getContract } from "@/utils/contract";
 import { ethers } from "ethers";
 import { Label } from "@/components/ui/label";;
 import {toast} from "react-toastify";
+import Spline from '@splinetool/react-spline';
+
 import {
     Select,
     SelectContent,
@@ -354,11 +356,9 @@ export function CreateBountyForm() {
                     </form>
                 </div>
                 <div className="w-1/2 justify-end">
-                    <DotLottieReact
-                        autoplay
-                        loop
-                        src="dev.lottie"
-                    />
+                <Spline
+        scene="https://prod.spline.design/IBIzGylSkd97KXf7/scene.splinecode" 
+      />
                 </div>
             </div>
         </div>
