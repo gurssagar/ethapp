@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import ScrollReveal from '../ui/scrollReveal';
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
     ssr: false,
@@ -401,6 +402,7 @@ export function GlobeDemo() {
                         What is GitFund ?
                     </h1>
                     <p className="text-base sm:text-lg md:text-xl font-normal text-neutral-700 dark:text-neutral-200 max-w-xl mt-2 ml-40">
+                        
                         GitFund is a decentralized platform that transforms GitHub contributions into on-chain rewards.
                         Developers can set bounties, solve issues, and earn cryptocurrency with secure, transparent
                         payouts. The platform integrates a reputation system, allowing top developers to build their

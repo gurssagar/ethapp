@@ -5,6 +5,7 @@ import {GlobeDemo} from "../components/menu/head";
 import {useEffect, useState} from "react";
 import {AppleCardsCarouselDemo} from "../components/home/home3";
 import {TypewriterEffectSmoothDemo} from "../components/home/home4";
+import DecryptedText from '../components/ui/decryptedtext'
 
 
 
