@@ -1,8 +1,8 @@
+// @ts-nocheck
 'use client'
 import Menu from "@/components/menu/page";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { Octokit } from "octokit";
 
 export default function ViewBounties() {

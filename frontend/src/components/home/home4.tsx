@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import React from "react";

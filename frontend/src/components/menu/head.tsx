@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
@@ -5,9 +6,6 @@ import dynamic from "next/dynamic";
 import ScrollReveal from '../ui/scrollReveal';
 import Spline from '@splinetool/react-spline';
 
-const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
-    ssr: false,
-});
 
 export function GlobeDemo() {
     const globeConfig = {

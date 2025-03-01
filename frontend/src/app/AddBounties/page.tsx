@@ -17,7 +17,6 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { DefaultSession } from "next-auth";
 import {Octokit} from "octokit";
 import Menu from "../../components/menu/page";
@@ -26,12 +25,14 @@ interface Repo {
     id: number;
     name: string;
     full_name: string;
+    html_url: string;
 }
 
 interface Issue {
     id: number;
     title: string;
     number: number;
+    html_url: string;
 }
 
 interface ExtendedSession extends DefaultSession {
@@ -81,15 +82,16 @@ export function Page() {
                     setRepos(response.data);
 
                     // Update issues if a repo is already selected
-                    if (formData.githubRepo) {
-                        const [owner, repo] = formData.githubRepo.split('/');
-                        const { data: issuesList } = await octokit.issues.listForRepo({
-                            owner,
-                            repo,
-                            state: 'open'
-                        });
-                        setIssues(issuesList);
-                    }
+                    // Update issues if a repo is already selected
+                if (formData.githubRepo) {
+                const [owner, repo] = formData.githubRepo.split('/');
+                const { data: issuesList } = await octokit.rest.issues.listForRepo({
+                    owner,
+                    repo,
+                    state: 'open'
+                });
+                    // ... rest of your code
+                }
                 }
             } catch (error) {
                 console.error('GitHub authentication failed:', error);

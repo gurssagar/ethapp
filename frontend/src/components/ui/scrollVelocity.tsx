@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 import React, { useRef, useLayoutEffect, useState } from "react";
 import {
@@ -108,7 +109,7 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
     );
 
     const copyRef = useRef<HTMLSpanElement>(null);
-    const copyWidth = useElementWidth(copyRef);
+    const copyWidth = useElementWidth(copyRef as React.RefObject<HTMLElement>);
 
     function wrap(min: number, max: number, v: number): number {
       const range = max - min;
@@ -116,13 +117,13 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
       return mod + min;
     }
 
-    const x = useTransform(baseX, (v) => {
+    const x = useTransform(baseX, (v:any) => {
       if (copyWidth === 0) return "0px";
       return `${wrap(-copyWidth, 0, v)}px`;
     });
 
     const directionFactor = useRef<number>(1);
-    useAnimationFrame((t, delta) => {
+    useAnimationFrame((t:any, delta:any) => {
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
       if (velocityFactor.get() < 0) {

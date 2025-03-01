@@ -23,7 +23,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "ethers": "^6.13.5",
-    "framer-motion": "^11.18.1",
+    "framer-motion": "^11.18.2",
     "gsap": "^3.12.7",
     "i": "^0.3.7",
     "lucide-react": "^0.472.0",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
+    "@types/node": "^20.17.21",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

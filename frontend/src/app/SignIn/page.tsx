@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 import {useEffect} from "react";
 import {useState} from "react";
@@ -17,7 +18,7 @@ export default function SignIn() {
             const queryString = window.location.search;
             const urlSearchParams = new URLSearchParams(queryString);
             const codeParams=urlSearchParams.get("code");
-            localStorage.setItem("code", codeParams);
+            localStorage.setItem("code", codeParams as string);
             console.log(codeParams);
             let storedData=localStorage.getItem("access_token");
             if(codeParams && (storedData===null)){

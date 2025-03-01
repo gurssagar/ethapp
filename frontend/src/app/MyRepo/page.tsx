@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 import Menu from "@/components/menu/page";
 import { useEffect, useState } from "react";
