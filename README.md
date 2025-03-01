@@ -62,7 +62,7 @@ This project uses the [MIT License](https://spdx.org/licenses/MIT.html)
 * Run the development server with `npm run dev`
 
 #### Backend
-* Navigate to the main directory: `cd ..`
+* Navigate to the main directory: `cd backend`
 * Run the server with `node server.js`
 
 #### Contract Deployment
