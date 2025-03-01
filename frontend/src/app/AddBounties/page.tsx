@@ -44,7 +44,7 @@ interface ExtendedSession extends DefaultSession {
 
 
 
-export function Page() {
+const  Page = () => {
     //web3 start
     const { provider, signer, account } = useWeb3();
     const [depositAmount, setDepositAmount] = useState("");
