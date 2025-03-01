@@ -25,7 +25,7 @@ export function AppleCardsCarouselDemo() {
                     ))}
                 </div>
                 
-                <div className="mt-40 w-full mx-10 justify-between flex space-x-7 bg-[url('')] bg-cover bg-center bg-no-repeat">
+                <div className="mt-40 w-full mx-10 justify-between flex space-x-7 bg-cover bg-center bg-no-repeat">
                     <div className="w-1/3">
                         <h1 id="how" className="text-2xl mt-10 mb-10 -ml-40 lg:text-5xl  text-center   dark:from-neutral-800 dark:via-white dark:to-white">
                             How It Works
