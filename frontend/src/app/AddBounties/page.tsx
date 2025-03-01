@@ -43,7 +43,7 @@ interface ExtendedSession extends DefaultSession {
 
 
 
-export function CreateBountyForm() {
+export function Page() {
     //web3 start
     const { provider, signer, account } = useWeb3();
     const [depositAmount, setDepositAmount] = useState("");
@@ -366,4 +366,4 @@ export function CreateBountyForm() {
     );
 }
 
-export default CreateBountyForm;
+export default Page;
