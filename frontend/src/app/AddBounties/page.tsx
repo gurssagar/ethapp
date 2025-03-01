@@ -54,7 +54,7 @@ const  Page = () => {
     //Web3 Deposit 
 
     const [octokit, setOctokit] = useState<Octokit | null>(null);
-    const [repos, setRepos] = useState<Repo[]>([]);
+    const [repos, setRepos] = useState<any>([]);
     const [issues, setIssues] = useState<Issue[]>([]);
     
     console.log(repos,"bb")
@@ -153,7 +153,7 @@ const  Page = () => {
         if (repos.length > 0) {
             setFormData((prev) => ({
                 ...prev,
-                githubRepoOwner : repos[0].owner.login // Access the login of the first repo
+                githubRepoOwner : repos[0].owner.login || null // Access the login of the first repo
             }));
         
         }
