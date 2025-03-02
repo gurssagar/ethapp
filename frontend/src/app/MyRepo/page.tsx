@@ -25,7 +25,6 @@ const YourComponent = () => {
     useEffect(() => {
         // Initialize Octokit client
         const initOctokit = () => {
-            console.log("Access Token:", localStorage.getItem("accessToken"));
             const accessToken = localStorage.getItem("accessToken");
             
             if (accessToken) {

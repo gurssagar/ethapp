@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 import Menu from "@/components/menu/page";
 import { useEffect, useState } from "react";
@@ -125,44 +124,58 @@ export default function BountyRequests() {
                     Contribution Requests
                 </div>
                 <div className="grid grid-cols-3 gap-y-10">
-                    {userData.map((user, index) => (
-                        <form 
-                            key={index} 
-                            onSubmit={onSubmit} 
-                            className="bg-[#0a0a0a] p-10 rounded-xl mx-auto border-2 border-gray-700"
-                        >
-                            <div className="request-info flex flex-col gap-4 mb-6">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-gray-400 font-medium">Repository:</span>
-                                    <span className="text-gray-300">{user.githubRepo}</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-gray-400 font-medium">Repo Owner:</span>
-                                    <span className="text-gray-300">{user.repoOwner}</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-gray-400 font-medium">Contributor:</span>
-                                    <span className="text-gray-300">{user.contributorUsername}</span>
-                                </div>
+                {userData.map((user, index) => (
+                    <form onSubmit={onSubmit} className="bg-[#121212] p-10 rounded-xl mx-auto">
+                        <div className="request-info flex flex-col gap-4 mb-6">
+                            <div className="flex justify-between items-center">
+                                <span className="text-gray-700 font-medium dark:text-white">Repository:</span>
+                                <input
+                                    type="text"
+                                    name="repository"
+                                    className="text-gray-600 dark:text-white"
+                                    value={user.githubRepo}
+                                    readOnly
+                                />
                             </div>
-                            <div className="flex space-x-4">
+                            <div className="flex justify-between items-center">
+                                <span className="text-gray-700 font-medium dark:text-white">Repo Owner:</span>
+                                <input
+                                    type="text"
+                                    name="repoOwner"
+                                    className="text-gray-600 dark:text-white"
+                                    value={user.repoOwner}
+                                    readOnly
+                                />
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="text-gray-700 font-medium dark:text-white">Contributor:</span>
+                                <input
+                                    type="text"
+                                    name="contributorUsername"
+                                    className="text-gray-600 dark:text-white"
+                                    value={user.contributorUsername}
+                                    readOnly
+                                />
+                            </div>
+                            <div className="block space-x-4 gap-4">
                                 <button
                                     type="submit"
-                                    className="bg-gray-100 text-black px-4 py-4 rounded-full hover:bg-gray-700 transition-colors"
+                                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
                                 >
                                     Accept Contribution
                                 </button>
                                 <button
                                     type="button"
-                                    className="bg-gray-800 text-white px-4 py-4 rounded-full hover:bg-gray-700 transition-colors"
+                                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
                                 >
                                     Reject Contribution
                                 </button>
                             </div>
-                        </form>
-                    ))}
+                        </div>
+                    </form>
+                ))}
                 </div>
             </div>
         </>
-    );
-}    
+    )
+}

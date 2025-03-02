@@ -75,7 +75,9 @@ const YourComponent = () => {
                     const response = await fetch("https://ethapp-wine.vercel.app/getAccessToken?code=" + sessionStorage.getItem("code"));
                     const data = await response.json();
                     if (data.access_token) {
+                        if (typeof window !== 'undefined') {
                         localStorage.setItem("accessToken", data.access_token);
+                        }
                         setReRender(!reRender);
                     }
                 } catch (error) {
