@@ -9,9 +9,9 @@ import {TypewriterEffectSmoothDemo} from "../components/home/home4";
 import DecryptedText from '../components/ui/decryptedtext'
 import Spline from '@splinetool/react-spline';
 import ScrollVelocity from '../components/ui/scrollVelocity';
+import dynamic from "next/dynamic";
 
-
-export default function Home() {
+const Home = () => {
     const [theme, setTheme] = useState('dark');
 
     useEffect(() => {
@@ -76,5 +76,7 @@ export default function Home() {
   )
 }
 
-
+export default dynamic(() => Promise.resolve(Home), {
+  ssr: false
+});
 

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Octokit } from "octokit";
+import dynamic from "next/dynamic";
 
 const  BountyRequests = () => {
     const [userData, setUserData] = useState([]);

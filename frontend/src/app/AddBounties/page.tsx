@@ -368,4 +368,6 @@ const  Page = () => {
     );
 }
 
-export default Page;
+export default dynamic(() => Promise.resolve(Page), {
+    ssr: false
+});

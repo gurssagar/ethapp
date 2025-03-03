@@ -3,7 +3,7 @@ import Menu from "@/components/menu/page";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Octokit } from "octokit";
-
+import dynamic from "next/dynamic";
 
 const YourComponent = () => {
     const [reRender, setReRender] = useState(false);
@@ -286,4 +286,6 @@ const YourComponent = () => {
     );
 };
 
-export default YourComponent;
+export default dynamic(() => Promise.resolve(YourComponent), {
+    ssr: false
+});
