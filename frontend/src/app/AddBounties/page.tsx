@@ -8,7 +8,7 @@ import { ethers } from "ethers";
 import { Label } from "@/components/ui/label";;
 import {toast} from "react-toastify";
 import Spline from '@splinetool/react-spline';
-
+import dynamic from "next/dynamic";
 import {
     Select,
     SelectContent,
@@ -64,7 +64,7 @@ const  Page = () => {
     useEffect(() => {
         const authenticateGitHub = async () => {
             try {
-                const accessToken = localStorage.getItem("accessToken");
+                const accessToken = window.localStorage.getItem("accessToken");
 
                 if (accessToken) {
                     const octokit = new Octokit({
@@ -199,7 +199,7 @@ const  Page = () => {
             fetchBalance();
 
             // Then handle form submission
-            if (localStorage.getItem("accessToken")) {
+            if (window.localStorage.getItem("accessToken")) {
                 const response = await fetch("https://ethapp-wine.vercel.app/api/bounties", {
                     method: "POST",
                     headers: {

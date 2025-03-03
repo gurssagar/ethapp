@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 import Menu from "@/components/menu/page";
 import { useEffect, useState } from "react";
@@ -25,7 +24,7 @@ const YourComponent = () => {
     useEffect(() => {
         // Initialize Octokit client
         const initOctokit = () => {
-            const accessToken = localStorage.getItem("accessToken");
+            const accessToken = window.localStorage.getItem("accessToken");
             
             if (accessToken) {
                 const client = new Octokit({
@@ -38,7 +37,7 @@ const YourComponent = () => {
         initOctokit();
 
         const queryString = window.location.search;
-        let storedData = localStorage.getItem("access_token");
+        let storedData = window.localStorage.getItem("access_token");
         
         if (sessionStorage.getItem("code") && (storedData === null)) {
             async function getAccessToken() {
@@ -46,7 +45,7 @@ const YourComponent = () => {
                     const response = await fetch("https://ethapp-wine.vercel.app/getAccessToken?code=" + sessionStorage.getItem("code"));
                     const data = await response.json();
                     if (data.access_token) {
-                        localStorage.setItem("accessToken", data.access_token);
+                        window.localStorage.setItem("accessToken", data.access_token);
                         setReRender(!reRender);
                     }
                 } catch (error) {

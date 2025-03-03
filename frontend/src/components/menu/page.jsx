@@ -17,13 +17,13 @@ export default function Menu() {
     const [bg,setBg]=useState("systemDefault");;
         
     function handleThemeChange() {
-    localStorage.setItem("theme", "dark");
+    window.localStorage.setItem("theme", "dark");
     document.documentElement.classList.remove("light");
     document.documentElement.classList.add("dark");
     }
 
     function changeToLight(){
-    localStorage.setItem("theme", "light");
+    window.localStorage.setItem("theme", "light");
     document.documentElement.classList.remove("dark");
     document.documentElement.classList.add("light");
     }
@@ -41,7 +41,7 @@ export default function Menu() {
         else{
             sessionStorage.setItem("code",codeParams);
         }
-        let storedData=localStorage.getItem("access_token");
+        let storedData=window.localStorage.getItem("access_token");
         if(sessionStorage.getItem("code") && (storedData===null)){
             async function getAccessToken(){
                 await fetch("https://ethapp-wine.vercel.app/getAccessToken?code="+sessionStorage.getItem("code"),{
@@ -51,7 +51,7 @@ export default function Menu() {
                     .then((data) => {
                         console.log(data);
                         if(data.access_token){
-                            localStorage.setItem("accessToken",data.access_token);
+                            window.localStorage.setItem("accessToken",data.access_token);
                             setReRender(!reRender);
                         }
                     });
@@ -59,7 +59,7 @@ export default function Menu() {
                 await fetch("https://ethapp-wine.vercel.app/getUserData",{
                     method:"GET",
                     headers:{
-                        "Authorization":"Bearer "+localStorage.getItem("accessToken")
+                        "Authorization":"Bearer "+window.localStorage.getItem("accessToken")
                     }
                 }).then(response => response.json())
                     .then((data)=>{
@@ -91,7 +91,7 @@ export default function Menu() {
                 <div className="flex space-x-4">
                     <button className="text-white " onClick={() => router.push('/')}>Home</button>
                     {
-                        localStorage.getItem("accessToken")?
+                        window.localStorage.getItem("accessToken")?
                         <>
                             <button className="text-white " onClick={() => router.push('/AddBounties')}>AddBounties</button>
                             <button className="text-white " onClick={() => router.push('/ViewBounties')}>ViewBounties</button>
@@ -109,7 +109,7 @@ export default function Menu() {
                 <div className='flex space-x-4'>
                     
                     {
-                        localStorage.getItem("accessToken") ?
+                        window.localStorage.getItem("accessToken") ?
                             <div className="flex space-x-8 my-auto">
                              <ConnectWallet/> 
                             <div className='flex '>
@@ -140,7 +140,7 @@ export default function Menu() {
                                 </div>
                                 <button className="rounded-full  dark:text-black px-4  py-2 bg-gray-100 dark:bg-white "
                                                             onClick={() => {
-                                                                localStorage.removeItem("accessToken");
+                                                                window.localStorage.removeItem("accessToken");
                                                                 sessionStorage.removeItem("code");
                                                                 const toggleDetails = () => {
                                                                     setDetails(!details);
@@ -165,7 +165,7 @@ export default function Menu() {
                     <div>
                     <div>
                     {
-    localStorage.getItem("theme") === "dark" ?
+    window.localStorage.getItem("theme") === "dark" ?
         <button className="rounded-full  dark:text-black px-4 py-2 bg-gray-100 dark:bg-white"
         onClick={() => setTheme("light")}>
             Light Mode

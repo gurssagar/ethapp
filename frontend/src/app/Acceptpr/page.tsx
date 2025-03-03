@@ -1,13 +1,11 @@
 'use client'
 import Menu from "@/components/menu/page";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Octokit } from "octokit";
 import { useWeb3 } from "../../components/context/Web3Context";
 import { getContract } from "../../utils/contract";
 import { ethers } from "ethers";
-
-
+import dynamic from "next/dynamic";
 const YourComponent = () => {
     const [reRender, setReRender] = useState(false);
     const [userData, setUserData] = useState<any[]>([]);
@@ -15,7 +13,7 @@ const YourComponent = () => {
     const [showModal, setShowModal] = useState(false);
     const [prLink, setPRLink] = useState('');
     const [walletAddress, setWalletAddress] = useState('');
-    const [recipient,setRecipient]=useState();
+    const [recipient, setRecipient] = useState();
     const [formData, setFormData] = useState({
         repository: '',
         repoOwner: '',
@@ -26,9 +24,10 @@ const YourComponent = () => {
     });
 
     const { provider, signer, account } = useWeb3();
-      const [depositAmount, setDepositAmount] = useState("");
-      const [contractBalance, setContractBalance] = useState("0");
-      const handleWithdraw = async (recipient: string, withdrawAmount: string) => {
+    const [depositAmount, setDepositAmount] = useState("");
+    const [contractBalance, setContractBalance] = useState("0");
+
+    const handleWithdraw = async (recipient: string, withdrawAmount: string) => {
         if (!signer) return alert("Connect your wallet first!");
         try {
             const contract = getContract(signer);
@@ -42,20 +41,20 @@ const YourComponent = () => {
         }
     };
 
-      const fetchBalance = async () => {
-          if (!provider) return;
-          try {
+    const fetchBalance = async () => {
+        if (!provider) return;
+        try {
             const contract = getContract(provider);
             const balance = await contract.getBalance();
             setContractBalance(ethers.formatEther(balance));
-          } catch (error) {
+        } catch (error) {
             console.error("Fetch Balance Error:", error);
-          }
-        };
+        }
+    };
+
     useEffect(() => {
-        // Initialize Octokit client
         const initOctokit = () => {
-            const accessToken = localStorage.getItem("accessToken");
+            const accessToken = typeof window !== 'undefined' ? window.localStorage.getItem("accessToken") : null;
             if (accessToken) {
                 const client = new Octokit({
                     auth: accessToken,
@@ -64,41 +63,45 @@ const YourComponent = () => {
                 setOctokit(client);
             }
         };
-        initOctokit();
 
-        const queryString = window.location.search;
-        let storedData = localStorage.getItem("access_token");
-        
-        if (sessionStorage.getItem("code") && (storedData === null)) {
-            async function getAccessToken() {
-                try {
-                    const response = await fetch("https://ethapp-wine.vercel.app/getAccessToken?code=" + sessionStorage.getItem("code"));
+        const getAccessToken = async () => {
+            try {
+                const code = typeof window !== 'undefined' ? sessionStorage.getItem("code") : null;
+                if (code) {
+                    const response = await fetch("https://ethapp-wine.vercel.app/getAccessToken?code=" + code);
                     const data = await response.json();
                     if (data.access_token) {
                         if (typeof window !== 'undefined') {
-                        localStorage.setItem("accessToken", data.access_token);
+                            window.localStorage.setItem("accessToken", data.access_token);
                         }
                         setReRender(!reRender);
                     }
-                } catch (error) {
-                    console.error("Error getting access token:", error);
-                }
-            }
-            getAccessToken();
-        }
-
-        async function fetchContributeData() {
-            try {
-                const response = await fetch(`https://ethapp-wine.vercel.app/api/contributeRequest`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setUserData(data);
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Error getting access token:", error);
             }
+        };
+
+        if (typeof window !== 'undefined') {
+            initOctokit();
+            
+            if (sessionStorage.getItem("code") && !window.localStorage.getItem("accessToken")) {
+                getAccessToken();
+            }
+
+            const fetchContributeData = async () => {
+                try {
+                    const response = await fetch("https://ethapp-wine.vercel.app/api/contributeRequest");
+                    if (response.ok) {
+                        const data = await response.json();
+                        setUserData(data);
+                    }
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                }
+            };
+            fetchContributeData();
         }
-        fetchContributeData();
     }, []);
 
     const acceptContribution = async () => {
@@ -135,7 +138,7 @@ const YourComponent = () => {
     }) => {
         try {
             if (!octokit) return;
-            
+
             const response = await octokit.request(
                 `PATCH /repos/${formData.repoOwner}/${formData.repository}/issues/${formData.contributorUsername}`,
                 {
@@ -157,7 +160,6 @@ const YourComponent = () => {
         }
     };
 
-    
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         acceptContribution();
@@ -220,7 +222,7 @@ const YourComponent = () => {
                         <div className="bg-[#121212] rounded-lg p-6 max-w-md w-full mx-4">
                             <div className="flex justify-between items-center mb-4">
                                 <h2 className="text-xl font-bold text-white">Contribute</h2>
-                                <button 
+                                <button
                                     onClick={() => setShowModal(false)}
                                     className="text-gray-400 hover:text-gray-200"
                                 >
@@ -265,4 +267,6 @@ const YourComponent = () => {
     );
 };
 
-export default YourComponent;
+export default dynamic(() => Promise.resolve(YourComponent), {
+    ssr: false
+});

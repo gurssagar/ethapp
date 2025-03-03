@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 import {useEffect} from "react";
 import {useState} from "react";
@@ -18,9 +17,9 @@ export default function SignIn() {
             const queryString = window.location.search;
             const urlSearchParams = new URLSearchParams(queryString);
             const codeParams=urlSearchParams.get("code");
-            localStorage.setItem("code", codeParams as string);
+            window.localStorage.setItem("code", codeParams as string);
             console.log(codeParams);
-            let storedData=localStorage.getItem("access_token");
+            let storedData=window.localStorage.getItem("access_token");
             if(codeParams && (storedData===null)){
                 async function getAccessToken(){
                     await fetch("https://ethapp-wine.vercel.app/getAccessToken?code="+codeParams,{
@@ -30,7 +29,7 @@ export default function SignIn() {
                         .then((data) => {
                             console.log(data);
                             if(data.access_token){
-                                localStorage.setItem("accessToken",data.access_token);
+                                window.localStorage.setItem("accessToken",data.access_token);
                                 setReRender(!reRender);
                             }
                         });
@@ -38,7 +37,7 @@ export default function SignIn() {
                     await fetch("https://ethapp-wine.vercel.app/getUserData",{
                         method:"GET",
                         headers:{
-                            "Authorization":"Bearer "+localStorage.getItem("accessToken")
+                            "Authorization":"Bearer "+window.localStorage.getItem("accessToken")
                         }
                     }).then(response => response.json())
                         .then((data)=>{

@@ -15,11 +15,11 @@ export default function Home() {
     const [theme, setTheme] = useState('dark');
 
     useEffect(() => {
-        const storedTheme = localStorage.getItem('theme') || 'dark';
+        const storedTheme = window.localStorage.getItem('theme') || 'dark';
         setTheme(storedTheme);
 
         const handleStorageChange = () => {
-            setTheme(localStorage.getItem('theme') || 'dark');
+            setTheme(window.localStorage.getItem('theme') || 'dark');
         };
 
         window.addEventListener('storage', handleStorageChange);
