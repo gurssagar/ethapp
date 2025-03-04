@@ -2,8 +2,9 @@
 import {useEffect} from "react";
 import {useState} from "react";
 import {Octokit} from "octokit";
+import dynamic from "next/dynamic";
 const CLIENT_ID="Ov23liYe2P4o4RO7y4No"
-export default function SignIn() {
+const  SignIn =()  => {
     // TODO: Implement sign in logic
     function  loginwithGithub(){
         window.location.assign("https://www.github.com/login/oauth/authorize?client_id=" + CLIENT_ID);
@@ -72,3 +73,7 @@ export default function SignIn() {
         
     )
 }
+
+export default dynamic(() => Promise.resolve(SignIn), {
+  ssr: false
+});

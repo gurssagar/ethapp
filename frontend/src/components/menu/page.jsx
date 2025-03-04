@@ -6,9 +6,11 @@ import {Octokit} from "octokit";
 import { useRouter } from 'next/navigation';
 import { useTheme } from "next-themes";
 import ConnectWallet from "../ConnectWallet";
+import dynamic from "next/dynamic";
 import ContractInteraction from "../ContractInteraction";
 const CLIENT_ID="Ov23liYe2P4o4RO7y4No";
-export default function Menu() {
+
+const  Menu= () => {
     const { setTheme } = useTheme()
     const router = useRouter()
     function  loginwithGithub(){
@@ -187,3 +189,8 @@ export default function Menu() {
         </div>
     );
 }
+
+
+export default dynamic(() => Promise.resolve(Menu), {
+  ssr: false
+});
