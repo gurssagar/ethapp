@@ -38,7 +38,7 @@ const Home = () => {
                       Contributions
                   </button>
               </div>
-              <h1 className="text-[200px] h lg:text-9xl font-semibold  mx-auto mt-6 relative   bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+              <h1 className="text-4xl h lg:text-8xl font-semibold  mx-auto mt-6 relative   bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
                   Earn Crypto by Solving Github Issues
               </h1>
               <div className="flex space-x-4">
@@ -71,7 +71,21 @@ const Home = () => {
             <GlobeDemo/>
               <AppleCardsCarouselDemo/>
           </div>
-
+{/* Footer Section */}
+<footer className="mt-20 py-10 bg-gray-100 dark:bg-[#171717]">
+            <div className="container mx-auto px-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-gray-600 dark:text-gray-400">© 2023 GitFund. All rights reserved.</p>
+                </div>
+                <div className="flex space-x-4">
+                  <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Terms</a>
+                  <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Privacy</a>
+                  <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Contact</a>
+                </div>
+              </div>
+            </div>
+          </footer>
       </main>
   )
 }
