@@ -77,6 +77,6 @@ const Home = () => {
 }
 
 export default dynamic(() => Promise.resolve(Home), {
-  ssr: true
+  ssr: false
 });
 

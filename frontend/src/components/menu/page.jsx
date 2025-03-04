@@ -195,5 +195,5 @@ const  Menu= () => {
 
 
 export default dynamic(() => Promise.resolve(Menu), {
-  ssr: true
+  ssr: false
 });
