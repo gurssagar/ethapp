@@ -9,6 +9,7 @@ import ConnectWallet from "../ConnectWallet";
 import dynamic from "next/dynamic";
 import ContractInteraction from "../ContractInteraction";
 const CLIENT_ID="Ov23liYe2P4o4RO7y4No";
+import { signIn } from "next-auth/react"
 
 const  Menu= () => {
     const { setTheme } = useTheme()
@@ -46,7 +47,7 @@ const  Menu= () => {
         let storedData=window.localStorage.getItem("access_token");
         if(sessionStorage.getItem("code") && (storedData===null)){
             async function getAccessToken(){
-                await fetch("https://ethapp-wine.vercel.app/getAccessToken?code="+sessionStorage.getItem("code"),{
+                await fetch("https://ethapp-wine.vercel.app/getAccessToken?code="+codeParams,{
                     method:"GET"
                 }).then(response => {
                     return response.json()})
@@ -157,7 +158,9 @@ const  Menu= () => {
                             </div> 
                             
                             </div>: <>
-                            
+                           
+                                <button onClick={() => signIn("github")}>SignIN</button>
+
                                 <button className="rounded-full  dark:text-black px-4  py-2 bg-gray-100 dark:bg-white "
                                         onClick={loginwithGithub}>
                                     Login With Github
@@ -192,5 +195,5 @@ const  Menu= () => {
 
 
 export default dynamic(() => Promise.resolve(Menu), {
-  ssr: false
+  ssr: true
 });
