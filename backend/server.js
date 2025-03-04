@@ -11,8 +11,8 @@ var app=express();
 
 
  app.use(cors({
-     origin: 'http://localhost:3000', // Your frontend URL
-     credentials: true
+    origin: ['http://localhost:3001', 'https://ethapp-kg2k.vercel.app'],
+    credentials: true
  }
  ));
  app.use(bodyParser.json());
