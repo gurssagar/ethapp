@@ -212,9 +212,9 @@ const  Page = () => {
                 });
 
                 if (response.ok) {
-                    toast.success("Bounty created successfully!");
+                    console.log("Bounty created successfully!");
                 } else {
-                    console.error("Failed to save bounty details");
+                    console.log("Failed to save bounty details");
                 }
             } else {
                 console.error("User session not found");
