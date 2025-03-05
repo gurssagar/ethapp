@@ -38,6 +38,7 @@ const PrComponent = () => {
     useEffect(() => {
         fetchRepos();
     }, [octokit]);
+    console.log(repos)
 
     return (
         <div>
