@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Octokit } from "octokit";
+import Menu from '../../components/menu/page'
 import dynamic from "next/dynamic";
 
 const  BountyRequests = () => {
