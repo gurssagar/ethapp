@@ -8,10 +8,11 @@ import { useTheme } from "next-themes";
 import ConnectWallet from "../ConnectWallet";
 import dynamic from "next/dynamic";
 import ContractInteraction from "../ContractInteraction";
-const CLIENT_ID="Ov23liYe2P4o4RO7y4No";
 import { signIn } from "next-auth/react"
 
+
 const  Menu= () => {
+    const CLIENT_ID=process.env.AUTH_GITHUB_ID;
     const { setTheme } = useTheme()
     const router = useRouter()
     function  loginwithGithub(){
