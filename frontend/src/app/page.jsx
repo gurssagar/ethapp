@@ -79,8 +79,8 @@ const Home = () => {
                   <p className="text-gray-600 dark:text-gray-400">© 2023 GitFund. All rights reserved.</p>
                 </div>
                 <div className="flex space-x-4">
-                  <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Terms</a>
-                  <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Privacy</a>
+                  <a href="/terms" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Terms</a>
+                  <a href="/privacyPolicy" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Privacy</a>
                   <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Contact</a>
                 </div>
               </div>
