@@ -159,8 +159,6 @@ const  Menu= () => {
                             
                             </div>: <>
                            
-                                <button onClick={() => signIn("github")}>SignIN</button>
-
                                 <button className="rounded-full  dark:text-black px-4  py-2 bg-gray-100 dark:bg-white "
                                         onClick={loginwithGithub}>
                                     Login With Github
