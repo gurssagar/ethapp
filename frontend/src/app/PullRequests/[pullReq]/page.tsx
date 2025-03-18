@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import hljs from 'highlight.js/lib/common';
 import 'highlight.js/styles/github-dark.css';
 import Menu from '../../../components/menu/page';
+import Groq from "groq-sdk";
 const SomeClientComponent = () => {
     const [repos, setRepos] = useState<any[]>([]);
     const [data,setrepoData]=useState<any[]>([]);
@@ -12,6 +13,35 @@ const SomeClientComponent = () => {
     const [finalData,setFinalData]=useState<any>();
     const searchParams = useSearchParams()
     const repoType=searchParams.get('search')
+
+
+    const groq = new Groq({ 
+        apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
+        dangerouslyAllowBrowser: true 
+    });
+
+    async function getGroqChatCompletion() {
+        return groq.chat.completions.create({
+          messages: [
+            {
+              role: "user",
+              content: finalData,
+            },
+          ],
+          model: "llama-3.3-70b-versatile",
+        });
+      }
+
+    async function groqData() {
+        const chatCompletion = await getGroqChatCompletion();
+        // Print the completion returned by the LLM.
+        console.log(chatCompletion.choices[0]?.message?.content || "");
+    }
+
+
+
+
+   
 
 
 
@@ -228,9 +258,11 @@ const SomeClientComponent = () => {
                                 {finalData}
                             </code>
                         </pre>
-                        <div className='bg-white text-black mt-4 p-4 rounded'>
+                        <button onClick={() => {
+                            groqData()
+                        }} className='bg-white text-black mt-4 p-4 rounded'>
                             AI CODE REVIEW
-                        </div>
+                        </button>
                     </div>
                 </div>
             }
