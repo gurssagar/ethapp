@@ -17,7 +17,7 @@ const SomeClientComponent = () => {
     const [aiData,setAiData]=useState<any>("");
 
     const groq = new Groq({ 
-        apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
+        apiKey: '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',
         dangerouslyAllowBrowser: true 
     });
 
