@@ -1,7 +1,8 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect ,useContext} from 'react';
 import { Octokit } from 'octokit';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 const PrComponent = () => {
     const [repos, setRepos] = useState<any[]>([]);
@@ -28,6 +29,7 @@ const PrComponent = () => {
                         per_page: 100
                     });
                     setRepos(response.data);
+
                 }
             }
         } catch (error) {
@@ -42,12 +44,16 @@ const PrComponent = () => {
 
     return (
         <div>
+            <div className='grid grid-cols-3 px-4 py-10'>
             {repos.map((repo) => (
-                <div key={repo.id}>
+                <div key={repo.id} className="bg-gray-900 rounded-xl py-6 px-6 mx-20 my-10 ">
                     <h3>{repo.full_name}</h3>
-                    <p>{repo.description}</p>
+                    <button className='bg-white text-black py-2 px-4 mt-5'>View Code</button>
+                    <Link href={{pathname: `/PullRequests/${repo.id}`,query: {search: repo.full_name}}}>{repo.full_name}</Link>
+
                 </div>
             ))}
+            </div>
         </div>
     );
 };
