@@ -12,7 +12,7 @@ import { signIn } from "next-auth/react"
 
 
 const  Menu= () => {
-    const CLIENT_ID=process.env.AUTH_GITHUB_ID;
+    const CLIENT_ID=process.env.NEXT_PUBLIC_AUTH_GITHUB_ID;
     const { setTheme } = useTheme()
     const router = useRouter()
     function  loginwithGithub(){
