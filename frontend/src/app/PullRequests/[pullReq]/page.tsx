@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation'
 import hljs from 'highlight.js/lib/common';
 import 'highlight.js/styles/github-dark.css';
 import Menu from '../../../components/menu/page';
+import Groq from "groq-sdk";
+
 const SomeClientComponent = () => {
     const [repos, setRepos] = useState<any[]>([]);
     const [data,setrepoData]=useState<any[]>([]);
@@ -12,6 +14,36 @@ const SomeClientComponent = () => {
     const [finalData,setFinalData]=useState<any>();
     const searchParams = useSearchParams()
     const repoType=searchParams.get('search')
+    const [aiData,setAiData]=useState<any>("");
+
+    const groq = new Groq({ 
+        apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
+        dangerouslyAllowBrowser: true 
+    });
+
+    async function getGroqChatCompletion() {
+        return groq.chat.completions.create({
+          messages: [
+            {
+              role: "user",
+              content: finalData,
+            },
+          ],
+          model: "qwen-2.5-coder-32b",
+        });
+      }
+
+    async function groqData() {
+        const chatCompletion = await getGroqChatCompletion();
+        setAiData(chatCompletion.choices[0]?.message?.content)
+        // Print the completion returned by the LLM.
+        console.log(chatCompletion.choices[0]?.message?.content || "");
+    }
+
+
+
+
+   
 
 
 
@@ -228,9 +260,67 @@ const SomeClientComponent = () => {
                                 {finalData}
                             </code>
                         </pre>
-                        <div className='bg-white text-black mt-4 p-4 rounded'>
+                        <button onClick={() => {
+                            groqData()
+                        }} className='bg-white text-black mt-4 p-4 rounded'>
                             AI CODE REVIEW
+                        </button>
+                        // Modify the AI review display section
+                        <div>
+                            <div className='text-xl mb-4'>AI REVIEW</div>
+                            <div className='space-y-4'>
+                                {aiData.split('\n').reduce((acc, line, index, arr) => {
+                                    if (line.startsWith('```') && !acc.inCodeBlock) {
+                                        // Start of code block
+                                        return {
+                                            ...acc,
+                                            inCodeBlock: true,
+                                            codeBlock: [line]
+                                        };
+                                    } else if (line.startsWith('```') && acc.inCodeBlock) {
+                                        // End of code block
+                                        const completeCodeBlock = [...acc.codeBlock, line].join('\n');
+                                        const highlightedCode = hljs.highlightAuto(completeCodeBlock).value;
+                                        acc.elements.push(
+                                            <pre key={index} className='bg-gray-800 p-4 rounded-lg overflow-auto'>
+                                                <code className="hljs" dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+                                            </pre>
+                                        );
+                                        return {
+                                            ...acc,
+                                            inCodeBlock: false,
+                                            codeBlock: []
+                                        };
+                                    } else if (acc.inCodeBlock) {
+                                        // Inside code block
+                                        return {
+                                            ...acc,
+                                            codeBlock: [...acc.codeBlock, line]
+                                        };
+                                    } else {
+                                        // Handle other cases
+                                        if (line.startsWith('- ') || line.startsWith('* ')) {
+                                            acc.elements.push(
+                                                <div key={index} className='flex items-start'>
+                                                    <span className='mr-2'>•</span>
+                                                    <span>{line.substring(2)}</span>
+                                                </div>
+                                            );
+                                        } else if (line.trim() === '') {
+                                            acc.elements.push(<br key={index} />);
+                                        } else {
+                                            acc.elements.push(
+                                                <p key={index} className='text-gray-300'>
+                                                    {line}
+                                                </p>
+                                            );
+                                        }
+                                        return acc;
+                                    }
+                                }, { elements: [], inCodeBlock: false, codeBlock: [] }).elements}
+                            </div>
                         </div>
+
                     </div>
                 </div>
             }
