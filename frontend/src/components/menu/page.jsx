@@ -102,7 +102,7 @@ const  Menu= () => {
                             <button className="text-white " onClick={() => router.push('/Requests')}>Requests</button>
                             <button className="text-white " onClick={() => router.push('/MyRepo')}>My Repo</button>
                             <button className="text-white " onClick={() => router.push('/Acceptpr')}>Accept PR</button>
-
+                            <button className="text-white " onClick={() => router.push('/PullRequests')}>View PR</button>
                                                   </>
                         :
                         <>
