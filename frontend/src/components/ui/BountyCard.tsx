@@ -29,7 +29,7 @@ const BountyCard: React.FC<BountyCardProps> = ({
   onInvestigate,
 }) => {
   return (
-    <div className="max-w-md mx-auto bg-black rounded-3xl overflow-hidden border border-gray-800 shadow-lg p-6">
+    <div className=" mx-10  bg-black rounded-3xl overflow-hidden border border-gray-800 shadow-lg p-6">
       <div className="flex items-center justify-between mb-6">
         <div className="flex flex-col">
           <h2 className="text-white text-3xl font-bold">{title}</h2>
