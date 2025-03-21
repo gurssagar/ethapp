@@ -172,6 +172,19 @@ app.post('/api/bounties', async (req, res) => {
     }
 });
 
+app.get('/api/totalbounties', async (req, res) => {
+    try {
+        const totalbounties = await Bounty.find();
+        res.status(200).json(totalbounties);
+    } catch (error) {
+        console.error('Error fetching bounties:', error);
+        res.status(500).json({ 
+            error: 'Failed to fetch bounties',
+            message: error.message 
+        });
+    }
+});
+
 // GET route to retrieve bounties
 app.get('/api/bounties', async (req, res) => {
   try {

@@ -7,6 +7,14 @@ import Menu from "../../components/menu/page";
 const PrComponent = () => {
   const [repos, setRepos] = useState<any[]>([]);
   const [octokit, setOctokit] = useState<Octokit | null>(null);
+  const [userData, setUserData] = useState<any[]>([]);
+  const fetchBounties = async () => {
+    const res = await fetch(`https://ethapp-wine.vercel.app/api/totalbounties`);
+    const data = await res.json();
+    setUserData(data.data);
+    console.log(data.data, "akk");
+    };
+
 
   const fetchRepos = async () => {
     try {
@@ -38,6 +46,7 @@ const PrComponent = () => {
 
   useEffect(() => {
     fetchRepos();
+    fetchBounties();
   }, [octokit]);
   console.log(repos);
 
