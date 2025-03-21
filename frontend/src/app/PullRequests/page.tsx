@@ -11,11 +11,11 @@ const PrComponent = () => {
   const fetchBounties = async () => {
     const res = await fetch(`https://ethapp-wine.vercel.app/api/totalbounties`);
     const data = await res.json();
-    setUserData(data.data);
-    console.log(data.data, "akk");
+    setUserData(data);
+    console.log(data, "akk");
     };
 
-    
+
 
   const fetchRepos = async () => {
     try {
@@ -56,9 +56,13 @@ const PrComponent = () => {
       <Menu />
       <div>
         <div className="mt-40 grid grid-cols-3 px-4 py-10">
-          {repos.map((repo) => {
-            return (
-              <>
+        {userData.map(user => {
+            return repos.map(repo => {
+                if (user.githubRepo === repo.full_name) {
+                    return (
+                        // Render your component here
+                        <div key={repo.id}>
+                           <>
                 <div className="m-10 bg-gradient-to-br from-purple-900 to-black rounded-xl overflow-hidden shadow-lg border border-purple-700">
                   <div className="p-5">
                     {/* Header with app icon and name */}
@@ -96,7 +100,15 @@ const PrComponent = () => {
                         </div>
                       </div>
                       <div className="ml-auto">
-                        <a href={`${repo.html_url}`}>
+                      <Link
+                         href={{
+                            pathname: `/PullRequests/${repo.id}`,
+                            query: { search: repo.full_name },
+                            }}
+                        >
+                        {repo.full_name}
+              
+                        
                           <button className="p-2 rounded-full hover:bg-gray-800">
                             {/* Custom link icon */}
                             <svg
@@ -113,7 +125,8 @@ const PrComponent = () => {
                               <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                             </svg>
                           </button>
-                        </a>
+                       
+                        </Link>
                       </div>
                     </div>
 
@@ -132,7 +145,7 @@ const PrComponent = () => {
                       </div>
                       <div className="rounded-lg bg-gray-900 px-4 py-3">
                         <div className="text-gray-400 text-xs mb-1">
-                          Good first issues
+                          Pull Requests
                         </div>
                         <div className="flex items-center">
                           <div className="w-4 h-4 rounded-full bg-green-500 mr-2"></div>
@@ -193,8 +206,13 @@ const PrComponent = () => {
                   </div>
                 </div>
               </>
-            );
-          })}
+                        </div>
+                    );
+                }
+                return null;
+            }) 
+        })}
+          
           {repos.map((repo) => (
             <div
               key={repo.id}
@@ -204,14 +222,7 @@ const PrComponent = () => {
               <button className="bg-white text-black py-2 px-4 mt-5">
                 View Code
               </button>
-              <Link
-                href={{
-                  pathname: `/PullRequests/${repo.id}`,
-                  query: { search: repo.full_name },
-                }}
-              >
-                {repo.full_name}
-              </Link>
+              
             </div>
           ))}
         </div>
