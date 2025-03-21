@@ -213,18 +213,6 @@ const PrComponent = () => {
             }) 
         })}
           
-          {repos.map((repo) => (
-            <div
-              key={repo.id}
-              className="bg-gray-900 rounded-xl py-6 px-6 mx-20 my-10 "
-            >
-              <h3>{repo.full_name}</h3>
-              <button className="bg-white text-black py-2 px-4 mt-5">
-                View Code
-              </button>
-              
-            </div>
-          ))}
         </div>
       </div>
     </>
