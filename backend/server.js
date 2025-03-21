@@ -11,7 +11,7 @@ var app=express();
 
 
  app.use(cors({
-    origin: ['http://localhost:3000', 'https://ethapp-kg2k.vercel.app',"https://www.gitfund.tech"],
+    origin: ['http://localhost:3000','http://localhost:3001', 'https://ethapp-kg2k.vercel.app',"https://www.gitfund.tech"],
     credentials: true
  }
  ));
