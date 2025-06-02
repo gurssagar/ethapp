@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest,NextResponse } from 'next/server';
 import { db } from '../../../db/index';
 import { usersTable } from '../../../db/schema';
 import nodemailer from 'nodemailer';
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const { email} = await request.json();
         // First insert the project
@@ -341,7 +341,7 @@ export async function POST(request: Request) {
         }, { status: 500 });
     }
 }
-export async function GET(request: Request) {
+export async function GET() {
     // Logic for handling GET requests
     // For example, fetching and returning waitlist entries
     return NextResponse.json({ message: 'This is a GET request to save-waitlist' });
