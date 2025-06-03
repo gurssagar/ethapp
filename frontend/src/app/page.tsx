@@ -98,19 +98,19 @@ export default function BackgroundBeamsDemo() {
         </Form>
       </div>
 
-      <div className="flex mt-20 justify-between w-max-2xl">
-            <div className="flex">
-                <Image src="/x.svg" width={40} height={40} alt="X Gitfund" className="mr-4" />
+      <div className="flex mt-20 justify-between w-max-3xl">
+            <div className="flex mx-20">
+                <Image src="/x.svg" width={30} height={30} alt="X Gitfund" className="mr-4" />
                 <div className="mx-2 my-auto">
-                    <p className="text-xl text-gray-50">X</p>
-                    <p className="text-lg text-gray-400">@GITFUND2025</p>
+                    <p className="text-lg text-gray-50">X</p>
+                    <p className="text-[14px] text-gray-400">@GITFUND2025</p>
                 </div>
             </div>
-            <div className="flex">
-                <Image src="/linkedin.svg" width={40} height={40} alt="Your Company" className="mr-4" />
+            <div className="flex mx-20">
+                <Image src="/linkedin.svg" width={30} height={30} alt="LinkedIn Quarlatis" className="mr-4" />
                 <div className="mx-2 my-auto">
-                    <p className="text-xl text-gray-50">LinkedIn</p>
-                    <p className="text-lg text-gray-400">@quarlatis</p>
+                    <p className="text-lg text-gray-50">LinkedIn</p>
+                    <p className="text-[14px] text-gray-400">@quarlatis</p>
                 </div>
             </div>
         </div>
