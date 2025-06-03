@@ -4,6 +4,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -26,6 +27,8 @@ const formSchema = z.object({
 });
 
 export default function BackgroundBeamsDemo() {
+  const router = useRouter();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,7 +52,7 @@ export default function BackgroundBeamsDemo() {
     }
     sendToBackend().then(
       () => {
-          window.location.href = "/Thanks";
+          router.push("/Thanks");
       }
   );
     
