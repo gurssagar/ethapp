@@ -14,20 +14,20 @@ export default function BackgroundBeamsDemo() {
         </h1>
         <p className="text-gray-200 my-10">You will be among the first one to know when the product is ready to be launched and will get access to beta features.</p>
       </div>
-    <div className="mt-40 border-1 border-top border-[#010101] ">
-        <div>
-            <div className="flex">
-                <Image src="/logo.svg" width={100} height={100} alt="Your Company" className="mr-4" />
-                <div>
-                    <p className="text-xl text-gray-50">X</p>
-                    <p className="text-lg text-gray-400">@GITFUND2025</p>
+    <div className="mt-10 border-1 border-top border-[#010101] ">
+    <div className="flex mt-20 justify-between w-max-3xl">
+            <div className="flex mx-20">
+                <Image src="/x.svg" width={30} height={30} alt="X Gitfund" className="mr-4" />
+                <div className="mx-2 my-auto">
+                    <p className="text-lg text-gray-50">X</p>
+                    <p className="text-[14px] text-gray-400">@GITFUND2025</p>
                 </div>
             </div>
-            <div className="flex">
-                <Image src="/logo.svg" width={100} height={100} alt="Your Company" className="mr-4" />
-                <div>
-                    <p className="text-xl text-gray-50">X</p>
-                    <p className="text-lg text-gray-400">@GITFUND2025</p>
+            <div className="flex mx-20">
+                <Image src="/linkedin.svg" width={30} height={30} alt="LinkedIn Quarlatis" className="mr-4" />
+                <div className="mx-2 my-auto">
+                    <p className="text-lg text-gray-50">LinkedIn</p>
+                    <p className="text-[14px] text-gray-400">@quarlatis</p>
                 </div>
             </div>
         </div>
