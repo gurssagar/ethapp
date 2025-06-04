@@ -16,18 +16,16 @@ import {
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 
-// import { ProfileForm } from "@/components/ui/example-form"; // This import is not used in this component
-
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
-    message: "Email must be at least 2 characters.", // Corrected message for clarity, though email validation usually handles length implicitly
+    message: "Email must be at least 2 characters.",
   }),
 });
 
 export default function BackgroundBeamsDemo() {
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  // 1. Define your form.
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,10 +33,8 @@ export default function BackgroundBeamsDemo() {
     },
   });
 
-  // 2. Define a submit handler.
-
   function onSubmit(values: z.infer<typeof formSchema>) {
-    setErrorMessage(null); // Reset error message on new submit
+    setErrorMessage(null);
 
     const sendToBackend = async () => {
       const response = await fetch("/api/waitlist", {
@@ -47,7 +43,6 @@ export default function BackgroundBeamsDemo() {
       });
 
       if (!response.ok) {
-        // Try to parse error message from backend
         const text = await response.text();
         throw new Error(text || "Failed to send email");
       }
@@ -82,19 +77,17 @@ export default function BackgroundBeamsDemo() {
   }
 
   return (
-    <div className="h-screen w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
-      <div className="max-w-3xl mx-auto p-4 z-10">
-        {" "}
+    <div className="min-h-screen w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased px-2">
+      <div className="w-full max-w-3xl mx-auto p-2 sm:p-4 z-10">
         <div className="flex justify-center">
           <button className="text-center text-sm px-4 py-2 text-neutral-300 bg-neutral-800 rounded-full">
             Beta Access
           </button>
         </div>
-        {/* Added z-10 here to ensure form is above beams if they overlap */}
-        <h1 className="relative z-10 text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold">
+        <h1 className="relative z-10 text-2xl sm:text-4xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold mt-4">
           Join the waitlist
         </h1>
-        <div className="text-center text-sm px-4 py-2 text-neutral-400 rounded-full">
+        <div className="text-center text-xs sm:text-sm px-2 sm:px-4 py-2 text-neutral-400 rounded-full">
           Early users get access to high-reward bounties and earn more for their
           contributions, while maintainers can post tasks, attract top talent,
           and get critical issues resolved faster — making it a win-win for
@@ -114,16 +107,14 @@ export default function BackgroundBeamsDemo() {
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-8 mt-4 flex gap-4"
+                  className="space-y-4 mt-4 flex flex-col sm:flex-row gap-4"
                 >
-                  {/* Added mt-4 for spacing */}
                   <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                      <div className="w-3/4 ">
+                      <div className="w-full sm:w-3/4">
                         <FormItem>
-                          {/* Adjusted label color for dark bg */}
                           <FormControl>
                             <Input
                               placeholder="Enter Your Email"
@@ -131,7 +122,6 @@ export default function BackgroundBeamsDemo() {
                               className="bg-neutral-800 py-2 border-neutral-700 text-neutral-200 placeholder-neutral-500 focus:ring-neutral-600"
                             />
                           </FormControl>
-
                           <FormMessage />
                         </FormItem>
                       </div>
@@ -139,7 +129,7 @@ export default function BackgroundBeamsDemo() {
                   />
                   <Button
                     type="submit"
-                    className="w-1/4  bg-neutral-200 text-neutral-900 hover:bg-neutral-300"
+                    className="w-full sm:w-1/4 bg-neutral-200 text-neutral-900 hover:bg-neutral-300"
                   >
                     Join the waitlist
                   </Button>
@@ -150,8 +140,9 @@ export default function BackgroundBeamsDemo() {
         </div>
       </div>
 
-      <div className="flex justify-between w-max-3xl">
-        <div className="flex mx-20">
+      {/* Socials section */}
+      <div className="flex flex-col sm:flex-row justify-between items-center w-full max-w-3xl gap-4 mt-8 px-2">
+        <div className="flex items-center mx-0 sm:mx-20">
           <Image
             src="/x.svg"
             width={30}
@@ -159,7 +150,6 @@ export default function BackgroundBeamsDemo() {
             alt="X Gitfund"
             className="mr-4"
           />
-
           <div className="mx-2 my-auto">
             <p className="text-lg text-gray-50">X</p>
             <a
@@ -178,7 +168,7 @@ export default function BackgroundBeamsDemo() {
           rel="noopener noreferrer"
           className="cursor-pointer transition-colors group"
         >
-          <div className="flex mx-20 group-hover:bg-blue-950/20 rounded-lg">
+          <div className="flex items-center mx-0 sm:mx-20 group-hover:bg-blue-950/20 rounded-lg">
             <Image
               src="/linkedin.svg"
               width={30}
@@ -196,7 +186,7 @@ export default function BackgroundBeamsDemo() {
         </a>
       </div>
       {errorMessage && (
-        <div className="fixed bottom-10 right-10 text-sm bg-neutral-800 px-4 py-2 text-red-400 rounded-full">
+        <div className="fixed bottom-4 right-4 text-xs sm:text-sm bg-neutral-800 px-4 py-2 text-red-400 rounded-full max-w-[90vw] break-words">
           {errorMessage}
         </div>
       )}
