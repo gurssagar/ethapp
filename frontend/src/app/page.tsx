@@ -4,18 +4,15 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import Link from "next/link";
+
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 
@@ -28,7 +25,6 @@ const formSchema = z.object({
 });
 
 export default function BackgroundBeamsDemo() {
-  const router = useRouter();
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   // 1. Define your form.
