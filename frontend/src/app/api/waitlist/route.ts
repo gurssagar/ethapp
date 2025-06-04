@@ -4,7 +4,7 @@ import { usersTable } from "../../../db/schema";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL as string,
+  host: "mail.gdggtbit.in",
   port: 587,
   secure: false,
   auth: {
