@@ -15,6 +15,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -77,17 +78,15 @@ export default function BackgroundBeamsDemo() {
   }
 
   return (
-    <div className="min-h-screen w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased px-2">
+    <div className="dark min-h-screen w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased px-2">
       <div className="w-full max-w-3xl mx-auto p-2 sm:p-4 z-10">
         <div className="flex justify-center">
-          <button className="text-center text-sm px-4 py-2 text-neutral-300 bg-neutral-800 rounded-full">
-            Beta Access
-          </button>
+          
         </div>
-        <h1 className="relative z-10 text-2xl sm:text-4xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold mt-4">
+        <h1 className="relative z-10 text-4xl sm:text-4xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold mt-4">
           Join the waitlist
         </h1>
-        <div className="text-center text-xs sm:text-sm px-2 sm:px-4 py-2 text-neutral-400 rounded-full">
+        <div className="text-center text-[14px] sm:text-sm px-2 sm:px-4 py-2 text-neutral-400 rounded-full">
           Early users get access to high-reward bounties and earn more for their
           contributions, while maintainers can post tasks, attract top talent,
           and get critical issues resolved faster — making it a win-win for
@@ -107,19 +106,19 @@ export default function BackgroundBeamsDemo() {
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4 mt-4 flex flex-col sm:flex-row gap-4"
+                  className="space-y-4 mt-4 flex flex-col sm:flex-row lg:gap-4"
                 >
                   <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                      <div className="w-full sm:w-3/4">
+                      <div className="w-full sm:w-3/4 ">
                         <FormItem>
                           <FormControl>
                             <Input
                               placeholder="Enter Your Email"
                               {...field}
-                              className="bg-neutral-800 py-2 border-neutral-700 text-neutral-200 placeholder-neutral-500 focus:ring-neutral-600"
+                              className="bg-neutral-800 py-6 border-neutral-700 text-neutral-200 placeholder-neutral-500 focus:ring-neutral-600"
                             />
                           </FormControl>
                           <FormMessage />
@@ -129,7 +128,7 @@ export default function BackgroundBeamsDemo() {
                   />
                   <Button
                     type="submit"
-                    className="w-full sm:w-1/4 bg-neutral-200 text-neutral-900 hover:bg-neutral-300"
+                    className="w-full py-6 sm:w-1/4 bg-neutral-200 text-neutral-900 hover:bg-neutral-300"
                   >
                     Join the waitlist
                   </Button>
@@ -141,50 +140,43 @@ export default function BackgroundBeamsDemo() {
       </div>
 
       {/* Socials section */}
-      <div className="flex flex-col sm:flex-row justify-between items-center w-full max-w-3xl gap-4 mt-8 px-2">
-        <div className="flex items-center mx-0 sm:mx-20">
-          <Image
-            src="/x.svg"
-            width={30}
-            height={30}
-            alt="X Gitfund"
-            className="mr-4"
-          />
-          <div className="mx-2 my-auto">
-            <p className="text-lg text-gray-50">X</p>
-            <a
-              href="x.com/GITFUND2025"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <p className="text-[14px] text-gray-400">@GITFUND2025</p>
-            </a>
+      <div className="z-50  flex flex-row justify-center items-center w-full max-w-3xl gap-4 mt-8 px-2">
+        <Link
+          href="https://x.com/GITFUND2025"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block cursor-pointer" // Added block display
+        >
+          <div className="flex bg-black rounded-lg items-center mx-0 border-2 border-neutral-800 hover:scale-95 transition-transform p-2">
+            <Image
+              src="/x.png"
+              width={30}
+              height={30}
+              alt="X Gitfund"
+              className="pointer-events-none" // Added to prevent image interference
+            />
           </div>
-        </div>
+        </Link>
 
-        <a
+        <Link
           href="https://www.linkedin.com/company/quarlatis"
           target="_blank"
           rel="noopener noreferrer"
-          className="cursor-pointer transition-colors group"
+          className="block cursor-pointer" // Added block display
         >
-          <div className="flex items-center mx-0 sm:mx-20 group-hover:bg-blue-950/20 rounded-lg">
+          <div className="flex bg-black  rounded-lg items-center mx-0 border-2 border-neutral-800 hover:scale-95 transition-transform p-2">
             <Image
-              src="/linkedin.svg"
+              src="/linkedin.png"
               width={30}
               height={30}
               alt="LinkedIn Quarlatis"
-              className="mr-4"
+              className="pointer-events-none" // Added to prevent image interference
             />
-            <div className="mx-2 my-auto">
-              <p className="text-lg text-gray-50 group-hover:text-blue-400">
-                LinkedIn
-              </p>
-              <p className="text-[14px] text-gray-400">@quarlatis</p>
-            </div>
           </div>
-        </a>
+        </Link>
       </div>
+
+
       {errorMessage && (
         <div className="fixed bottom-4 right-4 text-xs sm:text-sm bg-neutral-800 px-4 py-2 text-red-400 rounded-full max-w-[90vw] break-words">
           {errorMessage}
