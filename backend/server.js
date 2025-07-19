@@ -3,15 +3,15 @@ var cors=require('cors');
 require('dotenv').config();
 const fetch=(...args) => import ('node-fetch').then(({default :fetch}) => fetch(...args));
 var bodyParser=require('body-parser');
-const CLIENT_ID = 'Ov23liYe2P4o4RO7y4No';
-const CLIENT_SECRET='44ea4c12fcc37815ac3708307f5ca6b50152e4d9';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET=process.env.CLIENT_SECRET;
 var mongoose = require('mongoose');
 const { type } = require('os');
 var app=express();
 
 
  app.use(cors({
-    origin: ['http://localhost:3000', 'https://ethapp-kg2k.vercel.app',"https://www.gitfund.tech"],
+    origin: ['http://localhost:3000','http://localhost:3001', 'https://ethapp-kg2k.vercel.app',"https://www.gitfund.tech"],
     credentials: true
  }
  ));
@@ -20,8 +20,7 @@ var app=express();
 
  //Mongoose Connection
 mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+   
 }).then(() => console.log("Connected to the server..."));
 
 //Database Schema
@@ -169,6 +168,19 @@ app.post('/api/bounties', async (req, res) => {
         res.status(500).json({ 
             error: 'An error occurred',
             details: error.message 
+        });
+    }
+});
+
+app.get('/api/totalbounties', async (req, res) => {
+    try {
+        const totalbounties = await Bounty.find();
+        res.status(200).json(totalbounties);
+    } catch (error) {
+        console.error('Error fetching bounties:', error);
+        res.status(500).json({ 
+            error: 'Failed to fetch bounties',
+            message: error.message 
         });
     }
 });
