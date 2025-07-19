@@ -14,7 +14,10 @@ This is a comprehensive GitHub repository, built on top of a Node.js and React f
 
 ### Technologies Used
 
--  Next.js
+-  Next.js\
+
+
+
   *For building and serving the application.*
 -  Express.js
   *Used for setting up backend endpoints.*
