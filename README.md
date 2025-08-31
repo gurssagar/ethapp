@@ -55,7 +55,6 @@ To run this project, navigate to your command line and follow these steps:
 3. Commit your changes: `git commit -m "brief description of commit"`
 4. Push to the branch: `git push origin name-new-feature`
 5. Open a pull request: select the branch in the github UI and submit a pull request.
-
 ### License
 This project uses the [MIT License](https://spdx.org/licenses/MIT.html)
 
